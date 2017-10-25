@@ -1,139 +1,80 @@
-Processing.js - @VERSION@
-=========================
-a port of the Processing visualization language
+# Processing.js
 
-About Us
---------
-* License:           MIT (see included LICENSE file for full license)
-* Original Author:   John Resig (http://ejohn.org)
-* Maintainers:       See included AUTHORS file for contributor list
-* Web Site:          http://processingjs.org
-* Github Repo:       http://github.com/jeresig/processing-js
-* Bug Tracker:       http://processing-js.lighthouseapp.com
+For the project website, visit http://processingjs.org
 
-Contributing and/or Participating Organizations
------------------------------------------------
-* The Processing Project and Community:  http://processing.org
-* The Mozilla Foundation:                https://www.mozilla.org/foundation/
-* Seneca College (CDOT):                 http://zenit.senecac.on.ca/wiki/
+This is the compilation repository for Processing.js, used in building the `processing.js` library from a series of Node.js flavoured commonjs modules, rather than existing as one large file as was the case in all versions up to and including  1.4.1 (released august 2012) .
 
-Contact Us
-----------
-* IRC Channel: Join the development team at irc://irc.mozilla.org/processing.js
-* Mailing List: User discussions happen at http://groups.google.com/group/processingjs
-* Twitter: http://twitter.com/processingjs
+**note:** this is not the repository for Processing, the language and IDE. Processing itself is hosted over at https://github.com/processing/processing. This is also not where to file bugs or ask questions about the "JS mode" that can be used with Processing, that project is hosted over at https://github.com/fjenett/javascript-mode-processing
 
-What is Processing.js?
-----------------------
-Processing.js is the sister project of the popular visual programming language
-Processing, designed for the web. Processing.js makes your data visualizations,
-digital art, interactive animations, educational graphs, video games, etc. work
-using web standards and without any plug-ins. You write code using the Processing
-language (or JavaScript), include it in your web page, and Processing.js does the
-rest.
+# Versioning
 
-Processing.js is perhaps best thought of as a JavaScript runtime for the Processing
-language. Where Processing relies upon Java for its graphics back-end, Processing.js
-uses the web--HTML5, canvas, and WebGL--to create 2D and 3D graphics, without
-developers having to learn those APIs and technologies.
+Processing.js adheres to [semver](http://semver.org) style versioning.
 
-Originally developed by Ben Fry and Casey Reas, Processing started as an open
-source programming language based on Java to help the electronic arts and visual
-design communities learn the basics of computer programming in a visual context.
-Processing.js takes this to the next level, allowing Processing code to be run by
-any HTML5 compatible browser, including current versions of Firefox, Safari,
-Chrome, Opera, and Internet Explorer. Processing.js brings the best of visual
-programming to the web, both for Processing and web developers.
+#  This project is currently in need of developers
 
-Much like the native language, Processing.js is a community driven project,
-and continues to grow as browser technology advances.  Processing.js is now
-compatible with Processing, and has an active developer and user community.
+There is currently no one working on, or maintaining, this codebase on a regular basis, so if you think you'd like to contribute to Processing.js, to bring it back in line with Processing's current API, and take advantage of the various APIs that have become available in browsers since Processing.js slowed down, we'd love to hear from you!
 
-Platform and Browser Compatibility
-----------------------------------
-Processing.js is explicitly developed for and actively tested on browsers that
-support the HTML5 canvas element. Processing.js runs in FireFox, Safari,
-Chrome, Opera, and Internet Explorer.
+File an issue to say that you'd like to help out, and we can find some good places for you to get started.
 
-Processing.js aims for 100 percent compatibility across all supported browsers;
-however, differences between individual canvas implementations may give
-slightly different results in your sketches.
+## Getting Processing.js
 
-Setting up a Simple Sketch
---------------------------
-In order to get a sketch going in the browser you will need to download the
-processing.js file and make two new files - one with the extension .html and
-the other with the extension .pde.
+### NPM install
 
-The .html file will have a link to the processing.js file you have downloaded,
-and a canvas tag with a link to the .pde file that you made.
+This is the preferred method of installing "the latest" version of Processing.js
 
-Here is an example of an .html file:
+`npm install processing-js`
 
-    <!doctype html>
-    <html>
-      <head>
-        <script src="processing.js"></script>
-      </head>
-      <body>
-        <canvas data-processing-sources="mySketch.pde"></canvas>
-      </body>
-    </html>
+### Getting Processing.js the plain way
 
-The custom attribute _data-processing-sources_ is used to link the sketch to
-the canvas.
+If you need to, you can also grab the `processing.js` or `processing.min.js` files, include them as script on your webpage, and you're all set. See `test.html` for a simple example of using Processing.js on your pages.
 
-Here is an example of a Processing sketch:
+### Bower install
 
-    void setup() {
-      size(200, 200);
-      background(125);
-      fill(255);
-      noLoop();
-      PFont fontA = loadFont("courier");
-      textFont(fontA, 14);
-    }
+Bower is no longer recommended as a way to get processing.js, and so might not even work anymore (it "should" work but there is no verification on that)
 
-    void draw() {
-      text("Hello Web!", 20, 20);
-      println("Hello Error Log!");
-    }
+`bower install Processing.js`
 
-Many more examples are available on the Processing.js website, http://processingjs.org/.
+## Playing with the code
 
-Loading Processing.js Sketches Locally
---------------------------------------
-Some web browsers (e.g., Chrome) require secondary files to be loaded from a
-web server for security reasons.  This means loading a web page that references
-a Processing.js sketch in a file via a file:/// URL vs. http:// will fail. You
-are particularly likely to run into this problem when you try to view your
-webpage directly from file, as this makes all relatively links file:/// links.
+Clone this project using git, and ensure you have [node.js](http://nodejs.org) installed. After cloning, install the require node packages using `npm install` in the processing-js directory. Modifying the code and building your own `processing.js` and `processing.min.js` files is then a fairly straight forward process. Modify the code as much as you want or need, then:
 
-There are several ways to get around this problem. You can use a browser which
-does allow file:/// access, although most current browsers either have, or plan
-to, no longer allow this by default. Another option is to run your own localhost
-webserver so that you can test your page from http://localhost, thus avoiding
-file:/// URLs. If you do not have a webserver installed, you can use the simple
-webserver that is bundled with Processing.js. This requires Python to be installed,
-and can be started by running the "httpd.py" script. This will set up a localhost
-webserver instance for as long as you keep it running, so that you can easily
-test your page in any browser of your choosing.
+1. Lint: `$> grunt`
+2. Test: `$> node test`
 
-Finally, most browsers can be told to turn off their same-origin policy
-restrictions, allowing you to test your page without running a localhost
-webserver.  However, we strongly advise against this as it will disable
-same-origin policy checking for any and all websites that you visit until
-you turn it back on. While "easy", this is unsafe.
+If step 1 gives you a "grunt: command not found" or similar error, run `npm install -g grunt-cli` to make sure grunt is globally installed as CLI command. If step 1 does not throw any errors, step 2 will run the Processing object through a battery of tests. Once the browser reference tests start, your `processing.js` and `processing.min.js` have been successfully built.
 
-Learn More About Processing.js
--------------------------------
-Processing developers should start with the Processing.js Quick Start Guide for
-Processing Developers at http://processingjs.org/reference/articles/p5QuickStart.
+### Only edit files in the ./src directory
 
-JavaScript developers should start with the Processing.js Quick Start Guide for
-JavaScript Developers at http://processingjs.org/reference/articles/jsQuickStart
+As is implicit to the whole `processing.js` and `processing.min.js` getting rebuilt every time: remember not to edit either of these files directly. Instead, all the real source code live inside the `./src` directory, except for the `build.js` file that is used to create the library bundle. As this build file should not reasonably require any fixing, if you want to try to fix anything, or see what happens when you change something, make sure you only ever do that in files inside `./src`.
 
-A more detailed guide is http://processingjs.org/articles/PomaxGuide.html
+### Test script runtime flags
 
-A complete reference of all Processing.js functions and variables is available
-at http://processingjs.org/reference.
+The test script also accepts the following optional arguments:
+
+* `--test=testfile.pde` runs one specific test
+* `--nobuild` does not build Pjs if all tests pass
+* `--failonerror` terminates the run if any error occurs.
+* `--noref` will not start a server process and a browser for doing ref testing.
+* `--noautoref` will start a server and a browser for ref testing, but doesn't auto-start the tests.
+
+### Manual operations
+
+You can also perform the post-unit-test steps manually:
+
+* Build processing.js: `$> browserify build.js -o processing.js`
+* Minify processing.js: `$> node minify`
+* Run test server: `$> node server`
+
+
+### While the browser tests run
+
+With the test server is running, the following urls are good to know:
+
+* [http://localhost:3000](http://localhost:3000) - vanilla example page
+* [http://localhost:3000/ref](http://localhost:3000/ref) - reference testing page
+* [http://localhost:3000/perf](http://localhost:3000/perf) - performance testing page
+* [http://localhost:3000/processing-helper.html](http://localhost:3000/processing-helper.html) - utility page for converting/running Processing code
+
+### Contributing to Processing.js
+
+Please read ["how to contribute to Processing.js"](CONTRIBUTING.md) for how you can contribute, and what code of conduct is expected to be followed.

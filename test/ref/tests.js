@@ -1,4 +1,6 @@
 var tests = [
+  { path: "test-this.pde", tags: ["2D"] },
+  { path: "test-this-class.pde", tags: ["2D"] },
   { path: "stretch.pde", tags: ["3D"] },
   { path: "arc-fill-crisp.pde", tags: ["2D"], epsilonOverride: 0.08 },
   { path: "mixture.pde", tags: ["3D"], knownFailureTicket: "1239" },
@@ -26,7 +28,6 @@ var tests = [
   { path: "pattern.pde", tags: ["2D"] },
   { path: "pixelarray.pde", tags: ["2D"] },
   { path: "pulses.pde", tags: ["2D"] },
-  { path: "smoke-particle-system.pde", tags: ["2D"] },
   { path: "zoom.pde", tags: ["3D"], epsilonOverride: 0.07 },
   { path: "tint-isImageDirty.pde", tags: ["2D"] },
   { path: "copy-no-source.pde", tags: ["2D", "BLEND"] },
@@ -114,6 +115,7 @@ var tests = [
   { path: "pshape_svg.pde", tags: ["2D","SVG"], epsilonOverride: 0.07 },
   { path: "shearx.pde", tags: ["2D"] },
   { path: "sheary.pde", tags: ["2D"] },
+  { path: "loadShape-child-nesting.pde", tags: ["2D","SVG"] },
   { path: "loadShape.pde", tags: ["2D","SVG"], epsilonOverride: 0.06 },
   { path: "loadShape2.pde", tags: ["2D","SVG"], epsilonOverride: 0.08 },
   { path: "loadShape3.pde", tags: ["2D","SVG"], epsilonOverride: 0.07 },
@@ -205,7 +207,7 @@ var tests = [
   { path: "text-unboxed-center-top.pde", tags:["2D", "Text"], epsilonOverride: 0.17 }, /* See ticket #1172 */
   { path: "text-unboxed-center-top-3D.pde", tags:["3D", "Text"], knownFailureTicket: "750" },
   { path: "text-unboxed-center-center.pde", tags:["2D", "Text"], epsilonOverride: 0.12, knownFailureTicket: "1684" }, /* See ticket #1172 */
-  { path: "text-unboxed-center-center-3D.pde", tags:["3D", "Text"], knownFailureTicket: "750" }, 
+  { path: "text-unboxed-center-center-3D.pde", tags:["3D", "Text"], knownFailureTicket: "750" },
   { path: "text-unboxed-center-bottom.pde", tags:["2D", "Text"], epsilonOverride: 0.17 }, /* See ticket #1172 */
   { path: "text-unboxed-center-bottom-3D.pde", tags:["3D", "Text"], knownFailureTicket: "750" },
   { path: "text-unboxed-right-top.pde", tags:["2D", "Text"], epsilonOverride: 0.15 }, /* See ticket #1172 */
@@ -243,6 +245,10 @@ var tests = [
   { path: "arc_ref1.pde",  tags: ["2D", "Crisp"], epsilonOverride: 0.10 },
   { path: "arc_ref2.pde",  tags: ["2D", "Crisp"], epsilonOverride: 0.13 },
   { path: "arc_ref3.pde",  tags: ["2D", "Crisp"], epsilonOverride: 0.13 },
+  { path: "arc-chord.pde",  tags: ["2D", "endShape2D", "Crisp"] },
+  { path: "arc-open.pde",  tags: ["2D", "endShape2D", "Crisp"] },
+  { path: "arc-pie.pde",  tags: ["2D", "endShape2D", "Crisp"] },
+  { path: "arc-pie-negative-angle.pde",  tags: ["2D", "endShape2D", "Crisp"] },
   { path: "bezier.pde", tags: ["2D"], epsilonOverride: 0.08 },
   { path: "ellipse.pde", tags: ["2D"] },
   { path: "ellipseMode.pde", tags: ["2D"] },
@@ -284,7 +290,7 @@ var tests = [
   { path: "point_3D_smooth_beginShape.pde", tags: ["3D"], epsilonOverride: 0.14 },
   { path: "point_3D_smooth_stroke.pde", tags: ["3D"], epsilonOverride: 0.14 },
   { path: "point_3D_smooth_hint_off.pde", tags: ["3D"], epsilonOverride: 0.14 },
-  
+
   { path: "box.pde", tags: ["3D"], epsilonOverride: 0.18 },
   { path: "box_scale_3D.pde", tags: ["3D"], epsilonOverride: 0.18 },
   { path: "applyMatrix.pde", tags: ["3D"] },

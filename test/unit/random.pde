@@ -1,19 +1,19 @@
 int attempts = 10000, buckets = 10;
 double[] r = new double[attempts]; // fully random
 for(int i=0;i<attempts;++i) {
-  r[i] = random(); 
+  r[i] = random();
 }
 
 randomSeed(14); // with seed
 double[] r1 = new double[attempts];
 for(int i=0;i<attempts;++i) {
-  r1[i] = random(); 
+  r1[i] = random();
 }
 
 randomSeed(14); // with same seed
 double[] r2 = new double[attempts];
 for(int i=0;i<attempts;++i) {
-  r2[i] = random(); 
+  r2[i] = random();
 }
 
 boolean r1r2TheSame = true;
@@ -49,17 +49,47 @@ var minSample = 30, maxSample = 40;
 for(int i=0;i<attempts;++i) {
   var sample = r1[i];
   if(sample < 0 || sample >= 1) _checkTrue(false); // bad random with no args
+  if(typeof sample !== "number") _checkTrue(false);
+  if(isNaN(sample)) _checkTrue(false);
 }
 for(int i=0;i<attempts;++i) {
   var sample = random(maxSample);
   if(sample < 0 || sample >= maxSample) _checkTrue(false); // bad random with one arg
+  if(typeof sample !== "number") _checkTrue(false);
+  if(isNaN(sample)) _checkTrue(false);
 }
 for(int i=0;i<attempts;++i) {
   var sample = random(minSample, maxSample);
   if(sample < minSample || sample >= maxSample) _checkTrue(false); // bad random with two arg
+  if(typeof sample !== "number") _checkTrue(false);
+  if(isNaN(sample)) _checkTrue(false);
 }
 
-// gaussian: simple call
-Random g = new Random();
-var g1 = g.nextGaussian(), g2 = g.nextGaussian(), g3 = g.nextGaussian();
+double r,
+    c = 512.0,
+    d = 0.000000001,
+    a = c - d,
+    b = c;
+boolean failed = false;
+for (int i=0; i<100000; i++) {
+  r = random(a, b);
+  if (r >= b || r < a) {
+    failed = true;
+    break;
+  }
+}
+// at this point `failed` reflects whether or not the previous run failed even once.
+_checkFalse(failed);
 
+double r,
+    b = 5e-324;
+boolean failed = false;
+for (int i=0; i<100; i++) {
+  r = random(b);
+  if (r >= b || r < 0) {
+    failed = true;
+    break;
+  }
+}
+// at this point `failed` reflects whether or not the previous run failed even once.
+_checkFalse(failed);
